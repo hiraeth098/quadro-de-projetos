@@ -1,21 +1,36 @@
-import React from "react";
-import Cartao from "./Cartao";
+import React, { useState } from 'react';
+import Cartao from './Cartao';
+import AdicionarCartaoForm from './AdicionarCartaoForm'; 
 import './Lista.css';
 
-function Lista({ titulo, cartoes }) {
-    return (
-        <div className="lista">
-            <h2 className="lista-titulo">{titulo}</h2>
-            <div className="lista-cartoes">
-                {/* Usamos .map() para criar um componente <Cartao /> para cada item da lista */}
+
+function Lista({ id, titulo, cartoes, onAdicionarCartao }) { 
+  const [mostrandoFormulario, setMostrandoFormulario] = useState(false);
+
+  return (
+    <div className="lista">
+      <h2 className="lista-titulo">{titulo}</h2>
+      <div className="lista-cartoes">
         {cartoes.map(cartao => (
           <Cartao key={cartao.id} conteudo={cartao.conteudo} />
         ))}
-                
-            </div>
-        </div>
-    );
+      </div>
+      {mostrandoFormulario ? (
+        <AdicionarCartaoForm
+          listaId={id}
+          onAdicionarCartao={onAdicionarCartao}
+          onCancelar={() => setMostrandoFormulario(false)}
+        />
+      ) : (
+        <button
+          onClick={() => setMostrandoFormulario(true)}
+          className="lista-btn-adicionar"
+        >
+          + Adicionar outro cartão
+        </button>
+      )}
+    </div>
+  );
 }
 
 export default Lista;
-

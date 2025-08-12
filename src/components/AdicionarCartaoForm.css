@@ -1,0 +1,41 @@
+.adicionar-cartao-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.adicionar-cartao-textarea {
+  width: 100%;
+  min-height: 60px;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  resize: vertical;
+  font-size: 14px;
+}
+
+.adicionar-cartao-controles {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.adicionar-cartao-btn-add {
+  background-color: #0c66e4;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.adicionar-cartao-btn-add:hover {
+  background-color: #0055cc;
+}
+
+.adicionar-cartao-btn-cancel {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #666;
+}

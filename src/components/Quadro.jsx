@@ -30,19 +30,42 @@ const dadosDoQuadro = [
 
 
 function Quadro() {
+  const [listas, setListas] = useState(dadosDoQuadro);
 
-    const [listas, setListas] = useState(dadosDoQuadro);
+  // 1. A LÓGICA VIVE AQUI!
+  const handleAdicionarCartao = (listaId, conteudoCartao) => {
+    const novoCartao = {
+      id: `card-${Date.now()}`, // ID único simples
+      conteudo: conteudoCartao,
+    };
 
-    return (
-        <main className="quadro">
-            {listas.map(lista => (
-                <Lista
-                    key={lista.id}
-                    titulo={lista.titulo}
-                    cartoes={lista.cartoes}
-                />
-            ))}            
-        </main>
-    );
+    // Cria uma cópia nova do array de listas
+    const novasListas = listas.map(lista => {
+      if (lista.id === listaId) {
+        // Se for a lista certa, adiciona o novo cartão
+        return {
+          ...lista,
+          cartoes: [...lista.cartoes, novoCartao],
+        };
+      }
+      return lista; // Se não, retorna a lista como estava
+    });
+
+    setListas(novasListas); // Atualiza o estado com o novo array
+  };
+
+  return (
+    <main className="quadro">
+      {listas.map(lista => (
+        <Lista
+          key={lista.id}
+          id={lista.id} // 2. Passar o ID para a lista
+          titulo={lista.titulo}
+          cartoes={lista.cartoes}
+          onAdicionarCartao={handleAdicionarCartao} // 3. Passar a função como prop
+        />
+      ))}
+    </main>
+  );
 }
 export default Quadro;

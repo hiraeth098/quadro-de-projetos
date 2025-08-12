@@ -13,3 +13,18 @@
     padding: 4px 8px;
     margin-bottom: 12px;
 }
+.lista-btn-adicionar {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+  cursor: pointer;
+  color: #555;
+  font-size: 14px;
+}
+
+.lista-btn-adicionar:hover {
+  background-color: #091e4214;
+}
