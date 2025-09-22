@@ -1,36 +1,26 @@
 import React, { useState } from 'react';
 import Cartao from './Cartao';
 import AdicionarCartaoForm from './AdicionarCartaoForm'; 
+import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import './Lista.css';
 
 
 function Lista({ id, titulo, cartoes, onAdicionarCartao }) { 
-  const [mostrandoFormulario, setMostrandoFormulario] = useState(false);
+  const idsDosCartoes = cartoes.map(cartao => cartao.id);
+
+  
 
   return (
     <div className="lista">
       <h2 className="lista-titulo">{titulo}</h2>
-      <div className="lista-cartoes">
-        {cartoes.map(cartao => (
-          <Cartao key={cartao.id} conteudo={cartao.conteudo} />
-        ))}
-      </div>
-      {mostrandoFormulario ? (
-        <AdicionarCartaoForm
-          listaId={id}
-          onAdicionarCartao={onAdicionarCartao}
-          onCancelar={() => setMostrandoFormulario(false)}
-        />
-      ) : (
-        <button
-          onClick={() => setMostrandoFormulario(true)}
-          className="lista-btn-adicionar"
-        >
-          + Adicionar outro cartão
-        </button>
-      )}
+      <SortableContext items={idsDosCartoes} strategy={verticalListSortingStrategy}>
+        <div className="lista-cartoes">
+          {cartoes.map(cartao => (
+            <Cartao key={cartao.id} conteudo={cartao.conteudo} />
+          ))}
+        </div>
+      </SortableContext>
     </div>
-  );
-}
-
+    );
+  }
 export default Lista;
